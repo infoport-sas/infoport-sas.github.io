@@ -1,0 +1,1077 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--LPDScheme.xsd V1.1-->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!--    Sixth level complex types-->
+    <xsd:simpleType name="FullLessType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FCL"/>
+            <xsd:enumeration value="LCL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="FCLLCLType">
+        <xsd:sequence>
+            <xsd:element type="FullLessType" name="DepartureFCLLCL"/>
+            <xsd:element type="FullLessType" name="ArrivalFCLLCL"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MeasureType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:float">
+                <xsd:attribute name="unitCode">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="kg"/>
+                            <xsd:enumeration value="m"/>
+                            <xsd:enumeration value="KG"/>
+                            <xsd:enumeration value="M"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="DimensionsType">
+        <xsd:sequence>
+            <xsd:element type="MeasureType" name="HeightMeasure" minOccurs="0"/>
+            <xsd:element type="MeasureType" name="LengthMeasure" minOccurs="0"/>
+            <xsd:element type="MeasureType" name="WidthMeasure" minOccurs="0"/>
+            <xsd:element type="MeasureType" name="SquareMeasure" minOccurs="0"/>
+            <xsd:element type="MeasureType" name="CubeMeasure" minOccurs="0"/>
+            <xsd:element type="MeasureType" name="WeightMeasure"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SealType">
+        <xsd:all>
+            <xsd:element type="xsd:string" name="SealCode"/>
+            <xsd:element name="SealType" minOccurs="0">
+                <xsd:simpleType>
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            CA Agent (Agent)
+                            CU Customs (Douanes)
+                            SA Heath controler (Sanitaire)
+                            SU Supplier (Fournisseur)
+                            TO Stevedor (Acconier)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="CA"/>
+                        <xsd:enumeration value="CU"/>
+                        <xsd:enumeration value="SA"/>
+                        <xsd:enumeration value="SU"/>
+                        <xsd:enumeration value="TO"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:all>
+    </xsd:complexType>
+
+    <xsd:complexType name="TemperatureType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:float">
+                <xsd:attribute name="unitCode">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="C"/>
+                            <xsd:enumeration value="F"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="TemperatureDescriptionType">
+        <xsd:all>
+            <xsd:element type="TemperatureType" name="TemperatureMinimum"/>
+            <xsd:element type="TemperatureType" name="TemperatureMaximum"/>
+            <xsd:element type="TemperatureType" name="TemperatureAverage"/>
+        </xsd:all>
+    </xsd:complexType>
+
+    <xsd:complexType name="LoadingTerminalType">
+        <xsd:sequence>
+            <xsd:element type="xsd:dateTime" name="ReceivedDateTime"/>
+            <xsd:element type="xsd:date" name="LoadDate"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    Fifth level complex types-->
+    <xsd:complexType name="HazardousDescriptionType">
+        <xsd:sequence>
+            <xsd:element name="UNCode">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="^[0-9]{4}$"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="ClassCode">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="1.1"/>
+                        <xsd:enumeration value="1.2"/>
+                        <xsd:enumeration value="1.3"/>
+                        <xsd:enumeration value="1.4"/>
+                        <xsd:enumeration value="1.5"/>
+                        <xsd:enumeration value="1.6"/>
+                        <xsd:enumeration value="2.1"/>
+                        <xsd:enumeration value="2.2"/>
+                        <xsd:enumeration value="2.3"/>
+                        <xsd:enumeration value="3"/>
+                        <xsd:enumeration value="4.1"/>
+                        <xsd:enumeration value="4.2"/>
+                        <xsd:enumeration value="4.3"/>
+                        <xsd:enumeration value="5.1"/>
+                        <xsd:enumeration value="5.2"/>
+                        <xsd:enumeration value="6.1"/>
+                        <xsd:enumeration value="6.2"/>
+                        <xsd:enumeration value="7"/>
+                        <xsd:enumeration value="8"/>
+                        <xsd:enumeration value="9"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="WrappingGroup">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="I"/>
+                        <xsd:enumeration value="II"/>
+                        <xsd:enumeration value="III"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CargoUnitType">
+        <xsd:sequence>
+            <xsd:element type="xsd:string" name="IdentificationID">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Cargo Unit ID (mandatory)
+                        if CargoStateCode in Consignment is:
+                        "CONT" : Container number,
+                        "VEHI" : VIN,
+                        "CONV" : an unique ID number
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TCType" minOccurs="0">
+                <xsd:simpleType>
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Mandatory only if CargoStateCode in Consignment is "CONT"
+                            Any ISOCode for container (as 22G0, 22R1, 42G0, 45R0,...)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="^[1234BCGHLMN][0245689CDEF][A-Z0-9]{2}$"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="xsd:boolean" name="Empty" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Mandatory only if CargoStateCode in Consignment is "CONT"
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element type="xsd:positiveInteger" name="NumberPackages"/>
+            <xsd:element type="xsd:string" name="Comment" minOccurs="0"/>
+            <xsd:element type="FCLLCLType" name="FCLLCL"/>
+            <xsd:element type="DimensionsType" name="Dimensions"/>
+            <xsd:element type="SealType" name="Seal" maxOccurs="unbounded" minOccurs="0"/>
+            <xsd:element type="TemperatureDescriptionType" name="TemperatureDescription" minOccurs="0"/>
+            <xsd:element type="LoadingTerminalType" name="LoadingTerminal" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    Fourth level complex types-->
+    <xsd:complexType name="ConsignmentType">
+        <xsd:sequence>
+            <xsd:element type="xsd:positiveInteger" name="SequenceNumeric"/>
+            <xsd:element type="xsd:string" name="CargoDescription"/>
+            <xsd:element name="CargoTypeCode">
+                <xsd:simpleType>
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            If CargoStateCode is "CONV" :
+                            43 GRAND RÉCIPIENT POUR VRAC SOUPLE («BIG BAG»)
+                            1A FÛT EN ACIER
+                            1B FÛT EN ALUMINIUM
+                            1D FÛT EN CONTRE-PLAQUÉ
+                            1G FÛT EN CARTON
+                            1W FÛT EN BOIS
+                            2C TONNEAU EN BOIS
+                            3A JERRICANE EN ACIER
+                            3H JERRICANE EN PLASTIQUE
+                            4A CAISSE EN ACIER
+                            4B CAISSE EN ALUMINIUM
+                            4C CAISSE EN BOIS NATUREL
+                            4D CAISSE EN CONTREPLAQUÉ
+                            4F CAISSE EN BOIS RECONSTITUÉ
+                            4G CAISSE EN PANNEAUX DE FIBRES
+                            4H CAISSE EN PLASTIQUE
+                            5H SAC EN TISSU DE PLASTIQUE
+                            5L SAC EN TEXTILE
+                            5M SAC EN PAPIER
+                            6H EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE
+                            6P EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE
+                            AA GRAND RÉCIPIENT POUR VRAC, EN PLASTIQUE RIGIDE
+                            AB RÉCEPTACLE EN CARTON
+                            AC RÉCEPTACLE EN PAPIER
+                            AD RÉCEPTACLE EN BOIS
+                            AE AEROSOL
+                            AF PALETTE MODULAIRE, REHAUSSES DE DIMENSIONS 80 X 60 CM
+                            AG PALLETTE, HOUSSE THERMORÉTRACTABLE
+                            AH PALETTE, 100 X 110 CM
+                            AI CAISSES
+                            AI BLISTER DOUBLE COQUE
+                            AJ CORNET
+                            AM AMPOULE NON PROTEGEE
+                            AP AMPOULE PROTEGEE
+                            AR CARCANS
+                            AT ATOMISEUR
+                            AV CAPSULE
+                            BA BARIL
+                            BB BOBINE
+                            BC CASIER A BOUTEILLE
+                            BD PLANCHE ("BOARD")
+                            BE BALLOT
+                            BF BALLON NON PROTEGE
+                            BG SAC ("BAG")
+                            BH BOUQUET
+                            BI BAC
+                            BJ BAQUET ("BUCKET")
+                            BK CORBEILLE
+                            BL BALLE COMPRIMEE
+                            BM CUVETTE
+                            BN BALLE NON COMPRIMEE
+                            BO BOUTEILLE NON PROTEGEE,CYLINDR
+                            BP BALLON PROTEGE
+                            BQ BOUTEILLE PROTEGEE,CYLINDRIQUE
+                            BR BARRE
+                            BS BOUTEILLE NON PROTEGEE,BULBEUS
+                            BT PIECE
+                            BU BARRIQUE
+                            BV BOUTEILLE PROTEGEE, BULBEUSE
+                            BW CAISSE POUR LIQUIDES
+                            BX BOITE ("BOX")
+                            BY PLANCHES (BOARD) EN BALLOT
+                            BZ BARRES EN BALLOT, BOTTE, FAISC
+                            CA BIDON RECTANGULAIRE
+                            CB CASIER A BIERE
+                            CC BIDON A LAIT
+                            CD BIDON AVEC ANSE ET BEC VERSEUR
+                            CE MANNE
+                            CF CANTINE
+                            CG CAGE
+                            CH COFFRE
+                            CI BIDON
+                            CJ CERCUEIL
+                            CK FOUDRE
+                            CL GLENE
+                            CM CARTE («CARD»)
+                            CN CONTENEUR
+                            CO BONBONNE NON PROTEGEE
+                            CP BONBONNE PROTEGEE
+                            CQ CARTOUCHE
+                            CR CADRE
+                            CS BOITE ("CASE")
+                            CS BAC
+                            CT CARTON
+                            CU COUPE
+                            CV ETUI
+                            CW ROLL
+                            CX BIDON CYLINDRIQUE
+                            CY CYLINDRIQUE
+                            CZ BACHE
+                            DA CASIER EN PLASTIQUE, À PLUSIEURS NIVEAUX
+                            DB CASIER EN BOIS, À PLUSIEURS NIVEAUX
+                            DC CAISSE EN CARTON, À PLUSIEURS NIVEAUX
+                            DG CAGE CHEP (COMMONWEALTH HANDLING EQUIPMENT POOL)
+                            DH CAISSE CHEP (COMMONWEALTH HANDLING EQUIPMENT POOL), EUROBOX
+                            DI DIVERS
+                            DI FÛT EN FER
+                            DJ DAME-JEANNE NON RPOTEGEE
+                            DK CARTON POUR VRAC
+                            DL CASIER EN PLASTIQUE POUR VRAC
+                            DM CASIER EN BOIS POUR VRAC
+                            DN GÉNÉRATEUR AÉROSOL
+                            DP DAME-JEANNE PROTEGEE
+                            DR FUT
+                            DS PLATEAU EN PLASTIQUE, UN NIVEAU, SANS COUVERCLE
+                            DT PLATEAU EN BOIS, UN NIVEAU, SANS COUVERCLE
+                            DU PLATEAU EN POLYSTYRÈNE, UN NIVEAU, SANS COUVERCLE
+                            DV PLATEAU EN CARTON, UN NIVEAU, SANS COUVERCLE
+                            DW PLATEAU EN PLASTIQUE, DEUX NIVEAUX, SANS COUVERCLE
+                            DX PLATEAU EN BOIS, DEUX NIVEAUX, SANS COUVERCLE
+                            DY PLATEAU EN CARTON, DEUX NIVEAUX, SANS COUVERCLE
+                            EC SAC PLASTIQUE
+                            ED CAISSE PALLETTE
+                            EE CAISSE PALLETTE EN BOIS
+                            EF CAISSE PALLETTE EN CARTON
+                            EG CAISSE PALLETTE EN PLASTIQUE
+                            EH CAISSE PALLETTE EN MÉTAL
+                            EI BAC ISOTHERME
+                            EN ENVELOPPE
+                            FA FARDEAUX
+                            FC CAGEOT
+                            FD HARASSE
+                            FI FUTAILLE
+                            FL FLACON
+                            FO COFFRET
+                            FP FILMPACK
+                            FR CHASSIS
+                            FT BARQUETTE POUR ALIMENTS («FOODTAINER»)
+                            FX SAC, CONTENANT SOUPLE
+                            GB BOUTEILLE A GAZ
+                            GI POUTRELLE
+                            GR RÉCEPTACLE EN VERRE
+                            GZ POUTRELLE EN BALLOT, BOTTE
+                            HA CORBEILLE AVEC ANSE, EN PLASTIQUE
+                            HB CORBEILLE AVEC ANSE, EN BOIS
+                            HC CORBEILLE AVEC ANSE, EN CARTON
+                            HG TONNEAU
+                            HR PANIER
+                            IA EMBALLAGE DE PRÉSENTATION, EN BOIS
+                            IB EMBALLAGE DE PRÉSENTATION, EN CARTON
+                            IC EMBALLAGE DE PRÉSENTATION, EN PLASTIQUE
+                            ID EMBALLAGE DE PRÉSENTATION, EN MÉTAL
+                            IE EMBALLAGE À FENÊTRE
+                            IF EMBALLAGE TUBULAIRE
+                            IG EMBALLAGE, ENROBÉ DANS DU PAPIER
+                            IH FÛT EN PLASTIQUE
+                            IK EMBALLAGE EN CARTON, AVEC TROUS DE PRÉHENSION
+                            IN LINGOT
+                            IZ LINGOTS EN BALLOT, BOTTE, FAISCEAU
+                            JC JERRICANE RECTANGULAIRE
+                            JG CRUCHE
+                            JR JARRE
+                            JT SAC EN JUTE
+                            JY JERRICANE CYLINDRIQUE
+                            KG TONNELET
+                            LG GRUME
+                            LT LOT
+                            LV CADRE («LIFTVAN»)
+                            LZ GRUMES EN BALLOT,BOTTE,FAISCEA
+                            LZ LINGOTS EN BALLOT,BOTTE,FAISCE
+                            MB SAC MULTIPLIS
+                            MC CASIER A LAIT
+                            MR RÉCEPTACLE EN MÉTAL
+                            MS SAC MULTICORDE
+                            MT NATTE
+                            MW RÉCEPTABLE, ENROBAGE EN PLASTIQUE
+                            MX BOITE D'ALLUMETTES
+                            NA PAS DISPONIBLE
+                            NE MARCHANDISES NON EMBALLEES
+                            NF NON EMBALLÉ NI CONDITIONNÉ, UNE SEULE UNITÉ
+                            NG NON EMBALLÉ NI CONDITIONNÉ, PLUSIEURS UNITÉS
+                            NS BOITES GIGOGNES
+                            NT FILET
+                            NU FILET TUBULAIRE, EN PLASTIQUE
+                            NV FILET TUBULAIRE, EN TEXTILE
+                            PA PAQUET
+                            PB PALETTE-CAISSE («PALLET BOX»)
+                            PC COLIS ("PARCEL")
+                            PD PALETTE MODULAIRE, REHAUSSES DE DIMENSIONS 80 X 100 CM
+                            PE PALETTES
+                            PF STYLO, STYLET («PEN»)
+                            PG PLAQUE
+                            PH PICHET
+                            PI TUYAU
+                            PJ FLEIN
+                            PK COLIS
+                            PL SEAU
+                            PN PLANCHE ("PLANK")
+                            PO SACHET ("POUCH")
+                            PR RÉCEPTACLE EN PLASTIQUE
+                            PT POT,BOCAL
+                            PU PLATEAU
+                            PV TUYAUX EN BALLOT, BOTTE, FAISCEAU
+                            PX PALETTE
+                            PY PLAQUES EN BALLOT,BOTTE,FAISCE
+                            PZ PLANCHES (PLANK) EN BALLOT
+                            PZ TUYAUX EN BALLOT,BOTTE,FAISCEA
+                            QA FÛT EN ACIER, À DESSUS NON AMOVIBLE
+                            QB FÛT EN ACIER, À DESSUS AMOVIBLE
+                            QC FÛT EN ALUMINIUM, À DESSUS NON AMOVIBLE
+                            QD FÛT EN ALUMINIUM, À DESSUS AMOVIBLE
+                            QF FÛT EN PLASTIQUE, À DESSUS NON AMOVIBLE
+                            QG FÛT EN PLASTIQUE, À DESSUS AMOVIBLE
+                            QH TONNEAU EN BOIS, À BONDE
+                            QJ TONNEAU EN BOIS, À DESSUS AMOVIBLE
+                            QK JERRICANE EN ACIER, À DESSUS NON AMOVIBLE
+                            QL JERRICANE EN ACIER, À DESSUS AMOVIBLE
+                            QM JERRICANE EN PLASTIQUE, À DESSUS NON AMOVIBLE
+                            QN JERRICANE EN PLASTIQUE, À DESSUS AMOVIBLE
+                            QP CAISSE EN BOIS NATUREL, ORDINAIRE
+                            QQ CAISSE EN BOIS NATUREL, À PANNEAUX ÉTANCHES AUX PULVÉRULENTS
+                            QR CAISSE EN PLASTIQUE EXPANSÉ
+                            QS CAISSE EN PLASTIQUE RIGIDE
+                            RD TIGE
+                            RG BAGUE
+                            RJ PENDERIE MOBILE
+                            RK RAYONNAGE («RACK»)
+                            RL TOURET
+                            RN RONDINS
+                            RO ROULEAU
+                            RT FILET A FRUITS
+                            RZ TIGES EN BALLOT,BOTTE,FAISCEAU
+                            SA SAC ("SACK")
+                            SB FEUILLE CALANDRÉE
+                            SC CAGETTE ("SHALLOW CRATE")
+                            SD DEVIDOIR
+                            SE COFFRE DE MARIN
+                            SH SACHET ("SACHET")
+                            SI LUGE («SKID»)
+                            SK CAGETTE ("TRAY PACK")
+                            SL FEUILLE-PALETTE
+                            SM TOLE
+                            SO DÉVIDOIR («SPOOL»)
+                            SP FEUILLE, EMROBAGE EN PLASTIQUE
+                            SS BAC EN ACIER
+                            ST FEUILLE
+                            SU VALISE
+                            SV ENVELOPPE EN ACIER
+                            SW EMBALLAGE THERMORECTACTABLE
+                            SX ASSORTIMENT («SET»)
+                            SY MANCHON
+                            SZ TOLES EN BALLOT,BOTTE,FAISCEAU
+                            TB BAQUET ("TUB")
+                            TC CASSE A THE
+                            TD TUBE DEFORMABLE (COLLAPSIBLE)
+                            TI FEUILLETTE
+                            TK CITERNE RECTANGULAIRE
+                            TL BAQUET AVEC COUVERCLE
+                            TN BOITE EN FER-BLANC
+                            TO TONNE
+                            TR MALLE
+                            TS FAISCEAU
+                            TU TUBE
+                            TV TUBE À EMBOUT
+                            TY CITERNE CYLINDRIQUE
+                            TZ TUBES EN BALLOT,BOTTE,FAISCEAU
+                            UC LIBRE (ANIMAL)
+                            VA CUVE
+                            VG VRAC,GAZ(à 1031 mbar et 15ºC)
+                            VI FIOLE
+                            VK «VANPACK»
+                            VL VRAC, LIQUIDE
+                            VL VRAC, LIQUIDE
+                            VO VRAC,SOLIDES PART.GROSSES(NODU
+                            VP EMBALLAGE SOUS VIDE
+                            VQ VRAC,GAZ LIQUEFIE(Tº/pres anor
+                            VQ VRAC, GAZ LIQUÉFIÉ (À TEMPÉRATURE ET PRESSION ANORMALES)
+                            VR VRAC, SOLIDE, PARTICULES GRANULEUSES («GRAINS»)
+                            VY VRAC,SOLIDE,PARTICULES GRANUL.
+                            VY VRAC, SOLIDE, PARTICULES FINES («POUDRES»)
+                            WA GRAND RÉCIPIENT POUR VRAC
+                            WB BONBONNE CLISSEE
+                            WC GRAND RÉCIPIENT POUR VRAC, EN ACIER
+                            WD GRAND RÉCIPIENT POUR VRAC, EN ALUMINIUM
+                            WF GRAND RÉCIPIENT POUR VRAC, MÉTALLIQUE
+                            WG GRAND RÉCIPIENT POUR VRAC, EN ACIER, AVEC REMPLISSAGE OU VIDANGE SOUS PRESSION SUPÉRIEURE
+                            À 10 KPA (0,1 BAR)
+                            WH GRAND RÉCIPIENT POUR VRAC, EN ALUMINIUM, AVEC REMPLISSAGE OU VIDANGE SOUS PRESSION
+                            SUPÉRIEURE À 10 KPA (0,1 BAR)
+                            WJ GRAND RÉCIPIENT POUR VRAC, MÉTALLIQUE, POUR REMPLISSAGE OU VIDANGE SOUS PRESSION
+                            SUPÉRIEURE À 10 KPA (0,1 BAR)
+                            WK GRAND RÉCIPIENT POUR VRAC LIQUIDE, EN ACIER
+                            WL GRAND RÉCIPIENT POUR VRAC LIQUIDE, EN ALUMINIUM
+                            WM GRAND RÉCIPIENT POUR VRAC LIQUIDE, MÉTALLIQUE
+                            WN GRAND RÉCIPIENT POUR VRAC, EN TISSU DE PLASTIQUE, SANS REVÊTEMENT INTÉRIEUR NI DOUBLURE
+                            WP GRAND RÉCIPIENT POUR VRAC, EN TISSU DE PLASTIQUE, AVEC REVÊTEMENT INTÉRIEUR
+                            WQ GRAND RÉCIPIENT POUR VRAC, EN TISSU DE PLASTIQUE, AVEC DOUBLURE
+                            WR GRAND RÉCIPIENT POUR VRAC, EN TISSU DE PLASTIQUE, AVEC REVÊTEMENT INTÉRIEUR ET DOUBLURE
+                            WS GRAND RÉCIPIENT POUR VRAC, EN FILM DE PLASTIQUE
+                            WT GRAND RÉCIPIENT POUR VRAC, EN TEXTILE SANS REVÊTEMENT INTÉRIEUR NI DOUBLURE
+                            WU GRAND RÉCIPIENT POUR VRAC, EN BOIS NATUREL, AVEC DOUBLURE
+                            WV GRAND RÉCIPIENT POUR VRAC, EN TEXTILE, AVEC REVÊTEMENT INTÉRIEUR
+                            WW GRAND RÉCIPIENT POUR VRAC, EN TEXTILE, AVEC DOUBLURE
+                            WX GRAND RÉCIPIENT POUR VRAC, EN TEXTILE, AVEC REVÊTEMENT INTÉRIEUR ET DOUBLURE
+                            WY GRAND RÉCIPIENT POUR VRAC, EN CONTRE-PLAQUÉ, AVEC DOUBLURE
+                            WZ GRAND RÉCIPIENT POUR VRAC, EN BOIS RECONSTITUÉ, AVEC DOUBLURE
+                            XA SAC EN TISSU DE PLASTIQUE, SANS REVÊTEMENT INTÉRIEUR NI DOUBLURE
+                            XB SAC EN TISSU DE PLASTIQUE, ÉTANCHE AUX PULVÉRULENTS
+                            XC SAC EN TISSU DE PLASTIQUE, RÉSISTANT À L'EAU
+                            XD SAC EN FILM DE PLASTIQUE
+                            XF SAC EN TEXTILE, SANS REVÊTEMENT INTÉRIEUR NI DOUBLURE
+                            XG SAC EN TEXTILE, ÉTANCHE AUX PULVÉRULENTS
+                            XH SAC EN TEXTILE, RÉSISTANT À L'EAU
+                            XJ SAC EN PAPIER MULTIPLIS
+                            XK SAC EN PAPIER MULTIPLIS, RÉSISTANT À L'EAU
+                            YA EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC FÛT EXTÉRIEUR EN ACIER
+                            YB EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC CAISSE EXTÉRIEURE EN ACIER
+                            YC EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC FÛT EXTÉRIEUR EN ALUMINIUM
+                            YD EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC CAISSE EXTÉRIEURE EN ALUMINIUM
+                            YF EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC CAISSE EXTÉRIEURE EN BOIS
+                            YG EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC FÛT EXTÉRIEUR EN CONTRE-PLAQUÉ
+                            YH EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC CAISSE EXTÉRIEURE EN CONTRE-PLAQUÉ
+                            YJ EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC FÛT EXTÉRIEUR EN CARTON
+                            YK EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC CAISSE EXTÉRIEURE EN CARTON
+                            YL EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC FÛT EXTÉRIEUR EN PLASTIQUE
+                            YM EMBALLAGE COMPOSITE, RÉCIPIENT EN PLASTIQUE AVEC CAISSE EXTÉRIEURE EN PLASTIQUE RIGIDE
+                            YN EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC FÛT EXTÉRIEUR EN ACIER
+                            YP EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC CAISSE EXTÉRIEURE EN ACIER
+                            YQ EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC FÛT EXTÉRIEUR EN ALUMINIUM
+                            YR EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC CAISSE EXTÉRIEURE EN ALUMINIUM
+                            YS EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC CAISSE EXTÉRIEURE EN BOIS
+                            YT EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC FÛT EXTÉRIEUR EN CONTRE-PLAQUÉ
+                            YV EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC PANIER EXTÉRIEUR EN OSIER
+                            YW EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC FÛT EXTÉRIEUR EN CARTON
+                            YX EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC CAISSE EXTÉRIEURE EN CARTON
+                            YY EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC EMBALLAGE EXTÉRIEUR EN PLASTIQUE EXPANSÉ
+                            YZ EMBALLAGE COMPOSITE, RÉCIPIENT EN VERRE AVEC EMBALLAGE EXTÉRIEUR EN PLASTIQUE RIGIDE
+                            ZA GRAND RÉCIPIENT POUR VRAC, EN PAPIER MULTIPLIS
+                            ZB SAC DE GRANDE TAILLE
+                            ZC GRAND RÉCIPIENT POUR VRAC, EN PAPIER MULTIPLIS, RÉSISTANT À L'EAU
+                            ZD GRAND RÉCIPIENT POUR VRAC SOLIDE, EN PLASTIQUE RIGIDE, AVEC ÉQUIPEMENT DE STRUCTURE
+                            ZF GRAND RÉCIPIENT POUR VRAC SOLIDE, EN PLASTIQUE RIGIDE, AUTOPORTANT
+                            ZG GRAND RÉCIPIENT POUR VRAC, EN PLASTIQUE RIGIDE, AVEC ÉQUIPEMENT DE STRUCTURE, POUR
+                            REMPLISSAGE OU VIDANGE SOUS PRESSION
+                            ZH GRAND RÉCIPIENT POUR VRAC , EN PLASTIQUE RIGIDE, AUTOPORTANT, POUR REMPLISSAGE OU VIDANGE
+                            SOUS PRESSION
+                            ZJ GRAND RÉCIPIENT POUR VRAC LIQUIDE, EN PLASTIQUE RIGIDE, AVEC ÉQUIPEMENT DE STRUCTURE
+                            ZK GRAND RÉCIPIENT POUR VRAC LIQUIDE, EN PLASTIQUE RIGIDE, AUTOPORTANT
+                            ZL GRAND RÉCIPIENT POUR VRAC SOLIDE, EN MATÉRIAU COMPOSITE, AVEC RÉCIPIENT INTÉRIEUR EN
+                            PLASTIQUE RIGIDE
+                            ZM GRAND RÉCIPIENT POUR VRAC SOLIDE, EN MATÉRIAU COMPOSITE, AVEC RÉCIPIENT INTÉRIEUR EN
+                            PLASTIQUE SOUPLE
+                            ZN GRAND RÉCIPIENT POUR VRAC, EN MATÉRIAU COMPOSITE, AVEC RÉCIPIENT INTÉRIEUR EN PLASTIQUE
+                            RIGIDE, POUR REMPLISSAGE OU VIDANGE SOUS PRESSION
+                            ZP GRAND RÉCIPIENT POUR VRAC, EN MATÉRIAU COMPOSITE, AVEC RÉCIPIENT INTÉRIEUR EN PLASTIQUE
+                            SOUPLE, POUR REMPLISSAGE OU VIDANGE SOUS PRESSION
+                            ZQ GRAND RÉCIPIENT POUR VRAC LIQUIDE, EN MATÉRIAU COMPOSITE, AVEC RÉCIPIENT INTÉRIEUR EN
+                            PLASTIQUE RIGIDE
+                            ZR GRAND RÉCIPIENT POUR VRAC LIQUIDE, EN MATÉRIAU COMPOSITE, AVEC RÉCIPIENT INTÉRIEUR EN
+                            PLASTIQUE SOUPLE
+                            ZS GRAND RÉCIPIENT POUR VRAC, EN MATÉRIAUX COMPOSITES
+                            ZT GRAND RÉCIPIENT POUR VRAC, EN PANNEAUX DE FIBRES
+                            ZU GRAND RÉCIPIENT POUR VRAC, SOUPLE
+                            ZV GRAND RÉCIPIENT POUR VRAC, EN MÉTAL AUTRE QUE L'ACIER
+                            ZW GRAND RÉCIPIENT POUR VRAC, EN BOIS NATUREL
+                            ZX GRAND RÉCIPIENT POUR VRAC, EN CONTRE-PLAQUÉ
+                            ZY GRAND RÉCIPIENT POUR VRAC, EN BOIS RECONSTITUÉ
+                            ZZ DÉFINITION COMMUNE
+
+                            If CargoStateCode is "VEHI" :
+                            CM CAMIONS
+                            RE REMORQUES
+                            TA TRACTEUR
+                            VH VEHICULE GENERIQUE
+                            VT VOITURES
+
+                            If CargoStateCode is "CONT" :
+                            PC COLIS ("PARCEL")
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="43"/>
+                        <xsd:enumeration value="1A"/>
+                        <xsd:enumeration value="1B"/>
+                        <xsd:enumeration value="1D"/>
+                        <xsd:enumeration value="1G"/>
+                        <xsd:enumeration value="1W"/>
+                        <xsd:enumeration value="2C"/>
+                        <xsd:enumeration value="3A"/>
+                        <xsd:enumeration value="3H"/>
+                        <xsd:enumeration value="4A"/>
+                        <xsd:enumeration value="4B"/>
+                        <xsd:enumeration value="4C"/>
+                        <xsd:enumeration value="4D"/>
+                        <xsd:enumeration value="4F"/>
+                        <xsd:enumeration value="4G"/>
+                        <xsd:enumeration value="4H"/>
+                        <xsd:enumeration value="5H"/>
+                        <xsd:enumeration value="5L"/>
+                        <xsd:enumeration value="5M"/>
+                        <xsd:enumeration value="6H"/>
+                        <xsd:enumeration value="6P"/>
+                        <xsd:enumeration value="AA"/>
+                        <xsd:enumeration value="AB"/>
+                        <xsd:enumeration value="AC"/>
+                        <xsd:enumeration value="AD"/>
+                        <xsd:enumeration value="AE"/>
+                        <xsd:enumeration value="AF"/>
+                        <xsd:enumeration value="AG"/>
+                        <xsd:enumeration value="AH"/>
+                        <xsd:enumeration value="AI"/>
+                        <xsd:enumeration value="AI"/>
+                        <xsd:enumeration value="AJ"/>
+                        <xsd:enumeration value="AM"/>
+                        <xsd:enumeration value="AP"/>
+                        <xsd:enumeration value="AR"/>
+                        <xsd:enumeration value="AT"/>
+                        <xsd:enumeration value="AV"/>
+                        <xsd:enumeration value="BA"/>
+                        <xsd:enumeration value="BB"/>
+                        <xsd:enumeration value="BC"/>
+                        <xsd:enumeration value="BD"/>
+                        <xsd:enumeration value="BE"/>
+                        <xsd:enumeration value="BF"/>
+                        <xsd:enumeration value="BG"/>
+                        <xsd:enumeration value="BH"/>
+                        <xsd:enumeration value="BI"/>
+                        <xsd:enumeration value="BJ"/>
+                        <xsd:enumeration value="BK"/>
+                        <xsd:enumeration value="BL"/>
+                        <xsd:enumeration value="BM"/>
+                        <xsd:enumeration value="BN"/>
+                        <xsd:enumeration value="BO"/>
+                        <xsd:enumeration value="BP"/>
+                        <xsd:enumeration value="BQ"/>
+                        <xsd:enumeration value="BR"/>
+                        <xsd:enumeration value="BS"/>
+                        <xsd:enumeration value="BT"/>
+                        <xsd:enumeration value="BU"/>
+                        <xsd:enumeration value="BV"/>
+                        <xsd:enumeration value="BW"/>
+                        <xsd:enumeration value="BX"/>
+                        <xsd:enumeration value="BY"/>
+                        <xsd:enumeration value="BZ"/>
+                        <xsd:enumeration value="CA"/>
+                        <xsd:enumeration value="CB"/>
+                        <xsd:enumeration value="CC"/>
+                        <xsd:enumeration value="CD"/>
+                        <xsd:enumeration value="CE"/>
+                        <xsd:enumeration value="CF"/>
+                        <xsd:enumeration value="CG"/>
+                        <xsd:enumeration value="CH"/>
+                        <xsd:enumeration value="CI"/>
+                        <xsd:enumeration value="CJ"/>
+                        <xsd:enumeration value="CK"/>
+                        <xsd:enumeration value="CL"/>
+                        <xsd:enumeration value="CM"/>
+                        <xsd:enumeration value="CM"/>
+                        <xsd:enumeration value="CN"/>
+                        <xsd:enumeration value="CO"/>
+                        <xsd:enumeration value="CP"/>
+                        <xsd:enumeration value="CQ"/>
+                        <xsd:enumeration value="CR"/>
+                        <xsd:enumeration value="CS"/>
+                        <xsd:enumeration value="CS"/>
+                        <xsd:enumeration value="CT"/>
+                        <xsd:enumeration value="CU"/>
+                        <xsd:enumeration value="CV"/>
+                        <xsd:enumeration value="CW"/>
+                        <xsd:enumeration value="CX"/>
+                        <xsd:enumeration value="CY"/>
+                        <xsd:enumeration value="CZ"/>
+                        <xsd:enumeration value="DA"/>
+                        <xsd:enumeration value="DB"/>
+                        <xsd:enumeration value="DC"/>
+                        <xsd:enumeration value="DG"/>
+                        <xsd:enumeration value="DH"/>
+                        <xsd:enumeration value="DI"/>
+                        <xsd:enumeration value="DI"/>
+                        <xsd:enumeration value="DJ"/>
+                        <xsd:enumeration value="DK"/>
+                        <xsd:enumeration value="DL"/>
+                        <xsd:enumeration value="DM"/>
+                        <xsd:enumeration value="DN"/>
+                        <xsd:enumeration value="DP"/>
+                        <xsd:enumeration value="DR"/>
+                        <xsd:enumeration value="DS"/>
+                        <xsd:enumeration value="DT"/>
+                        <xsd:enumeration value="DU"/>
+                        <xsd:enumeration value="DV"/>
+                        <xsd:enumeration value="DW"/>
+                        <xsd:enumeration value="DX"/>
+                        <xsd:enumeration value="DY"/>
+                        <xsd:enumeration value="EC"/>
+                        <xsd:enumeration value="ED"/>
+                        <xsd:enumeration value="EE"/>
+                        <xsd:enumeration value="EF"/>
+                        <xsd:enumeration value="EG"/>
+                        <xsd:enumeration value="EH"/>
+                        <xsd:enumeration value="EI"/>
+                        <xsd:enumeration value="EN"/>
+                        <xsd:enumeration value="FA"/>
+                        <xsd:enumeration value="FC"/>
+                        <xsd:enumeration value="FD"/>
+                        <xsd:enumeration value="FI"/>
+                        <xsd:enumeration value="FL"/>
+                        <xsd:enumeration value="FO"/>
+                        <xsd:enumeration value="FP"/>
+                        <xsd:enumeration value="FR"/>
+                        <xsd:enumeration value="FT"/>
+                        <xsd:enumeration value="FX"/>
+                        <xsd:enumeration value="GB"/>
+                        <xsd:enumeration value="GI"/>
+                        <xsd:enumeration value="GR"/>
+                        <xsd:enumeration value="GZ"/>
+                        <xsd:enumeration value="HA"/>
+                        <xsd:enumeration value="HB"/>
+                        <xsd:enumeration value="HC"/>
+                        <xsd:enumeration value="HG"/>
+                        <xsd:enumeration value="HR"/>
+                        <xsd:enumeration value="IA"/>
+                        <xsd:enumeration value="IB"/>
+                        <xsd:enumeration value="IC"/>
+                        <xsd:enumeration value="ID"/>
+                        <xsd:enumeration value="IE"/>
+                        <xsd:enumeration value="IF"/>
+                        <xsd:enumeration value="IG"/>
+                        <xsd:enumeration value="IH"/>
+                        <xsd:enumeration value="IK"/>
+                        <xsd:enumeration value="IN"/>
+                        <xsd:enumeration value="IZ"/>
+                        <xsd:enumeration value="JC"/>
+                        <xsd:enumeration value="JG"/>
+                        <xsd:enumeration value="JR"/>
+                        <xsd:enumeration value="JT"/>
+                        <xsd:enumeration value="JY"/>
+                        <xsd:enumeration value="KG"/>
+                        <xsd:enumeration value="LG"/>
+                        <xsd:enumeration value="LT"/>
+                        <xsd:enumeration value="LV"/>
+                        <xsd:enumeration value="LZ"/>
+                        <xsd:enumeration value="LZ"/>
+                        <xsd:enumeration value="MB"/>
+                        <xsd:enumeration value="MC"/>
+                        <xsd:enumeration value="MR"/>
+                        <xsd:enumeration value="MS"/>
+                        <xsd:enumeration value="MT"/>
+                        <xsd:enumeration value="MW"/>
+                        <xsd:enumeration value="MX"/>
+                        <xsd:enumeration value="NA"/>
+                        <xsd:enumeration value="NE"/>
+                        <xsd:enumeration value="NF"/>
+                        <xsd:enumeration value="NG"/>
+                        <xsd:enumeration value="NS"/>
+                        <xsd:enumeration value="NT"/>
+                        <xsd:enumeration value="NU"/>
+                        <xsd:enumeration value="NV"/>
+                        <xsd:enumeration value="PA"/>
+                        <xsd:enumeration value="PB"/>
+                        <xsd:enumeration value="PC"/>
+                        <xsd:enumeration value="PD"/>
+                        <xsd:enumeration value="PE"/>
+                        <xsd:enumeration value="PF"/>
+                        <xsd:enumeration value="PG"/>
+                        <xsd:enumeration value="PH"/>
+                        <xsd:enumeration value="PI"/>
+                        <xsd:enumeration value="PJ"/>
+                        <xsd:enumeration value="PK"/>
+                        <xsd:enumeration value="PL"/>
+                        <xsd:enumeration value="PN"/>
+                        <xsd:enumeration value="PO"/>
+                        <xsd:enumeration value="PR"/>
+                        <xsd:enumeration value="PT"/>
+                        <xsd:enumeration value="PU"/>
+                        <xsd:enumeration value="PV"/>
+                        <xsd:enumeration value="PX"/>
+                        <xsd:enumeration value="PY"/>
+                        <xsd:enumeration value="PZ"/>
+                        <xsd:enumeration value="PZ"/>
+                        <xsd:enumeration value="QA"/>
+                        <xsd:enumeration value="QB"/>
+                        <xsd:enumeration value="QC"/>
+                        <xsd:enumeration value="QD"/>
+                        <xsd:enumeration value="QF"/>
+                        <xsd:enumeration value="QG"/>
+                        <xsd:enumeration value="QH"/>
+                        <xsd:enumeration value="QJ"/>
+                        <xsd:enumeration value="QK"/>
+                        <xsd:enumeration value="QL"/>
+                        <xsd:enumeration value="QM"/>
+                        <xsd:enumeration value="QN"/>
+                        <xsd:enumeration value="QP"/>
+                        <xsd:enumeration value="QQ"/>
+                        <xsd:enumeration value="QR"/>
+                        <xsd:enumeration value="QS"/>
+                        <xsd:enumeration value="RD"/>
+                        <xsd:enumeration value="RE"/>
+                        <xsd:enumeration value="RG"/>
+                        <xsd:enumeration value="RJ"/>
+                        <xsd:enumeration value="RK"/>
+                        <xsd:enumeration value="RL"/>
+                        <xsd:enumeration value="RN"/>
+                        <xsd:enumeration value="RO"/>
+                        <xsd:enumeration value="RT"/>
+                        <xsd:enumeration value="RZ"/>
+                        <xsd:enumeration value="SA"/>
+                        <xsd:enumeration value="SB"/>
+                        <xsd:enumeration value="SC"/>
+                        <xsd:enumeration value="SD"/>
+                        <xsd:enumeration value="SE"/>
+                        <xsd:enumeration value="SH"/>
+                        <xsd:enumeration value="SI"/>
+                        <xsd:enumeration value="SK"/>
+                        <xsd:enumeration value="SL"/>
+                        <xsd:enumeration value="SM"/>
+                        <xsd:enumeration value="SO"/>
+                        <xsd:enumeration value="SP"/>
+                        <xsd:enumeration value="SS"/>
+                        <xsd:enumeration value="ST"/>
+                        <xsd:enumeration value="SU"/>
+                        <xsd:enumeration value="SV"/>
+                        <xsd:enumeration value="SW"/>
+                        <xsd:enumeration value="SX"/>
+                        <xsd:enumeration value="SY"/>
+                        <xsd:enumeration value="SZ"/>
+                        <xsd:enumeration value="TA"/>
+                        <xsd:enumeration value="TB"/>
+                        <xsd:enumeration value="TC"/>
+                        <xsd:enumeration value="TD"/>
+                        <xsd:enumeration value="TI"/>
+                        <xsd:enumeration value="TK"/>
+                        <xsd:enumeration value="TL"/>
+                        <xsd:enumeration value="TN"/>
+                        <xsd:enumeration value="TO"/>
+                        <xsd:enumeration value="TR"/>
+                        <xsd:enumeration value="TS"/>
+                        <xsd:enumeration value="TU"/>
+                        <xsd:enumeration value="TV"/>
+                        <xsd:enumeration value="TY"/>
+                        <xsd:enumeration value="TZ"/>
+                        <xsd:enumeration value="UC"/>
+                        <xsd:enumeration value="VA"/>
+                        <xsd:enumeration value="VG"/>
+                        <xsd:enumeration value="VH"/>
+                        <xsd:enumeration value="VI"/>
+                        <xsd:enumeration value="VK"/>
+                        <xsd:enumeration value="VL"/>
+                        <xsd:enumeration value="VL"/>
+                        <xsd:enumeration value="VO"/>
+                        <xsd:enumeration value="VP"/>
+                        <xsd:enumeration value="VQ"/>
+                        <xsd:enumeration value="VQ"/>
+                        <xsd:enumeration value="VR"/>
+                        <xsd:enumeration value="VT"/>
+                        <xsd:enumeration value="VY"/>
+                        <xsd:enumeration value="VY"/>
+                        <xsd:enumeration value="WA"/>
+                        <xsd:enumeration value="WB"/>
+                        <xsd:enumeration value="WC"/>
+                        <xsd:enumeration value="WD"/>
+                        <xsd:enumeration value="WF"/>
+                        <xsd:enumeration value="WG"/>
+                        <xsd:enumeration value="WH"/>
+                        <xsd:enumeration value="WJ"/>
+                        <xsd:enumeration value="WK"/>
+                        <xsd:enumeration value="WL"/>
+                        <xsd:enumeration value="WM"/>
+                        <xsd:enumeration value="WN"/>
+                        <xsd:enumeration value="WP"/>
+                        <xsd:enumeration value="WQ"/>
+                        <xsd:enumeration value="WR"/>
+                        <xsd:enumeration value="WS"/>
+                        <xsd:enumeration value="WT"/>
+                        <xsd:enumeration value="WU"/>
+                        <xsd:enumeration value="WV"/>
+                        <xsd:enumeration value="WW"/>
+                        <xsd:enumeration value="WX"/>
+                        <xsd:enumeration value="WY"/>
+                        <xsd:enumeration value="WZ"/>
+                        <xsd:enumeration value="XA"/>
+                        <xsd:enumeration value="XB"/>
+                        <xsd:enumeration value="XC"/>
+                        <xsd:enumeration value="XD"/>
+                        <xsd:enumeration value="XF"/>
+                        <xsd:enumeration value="XG"/>
+                        <xsd:enumeration value="XH"/>
+                        <xsd:enumeration value="XJ"/>
+                        <xsd:enumeration value="XK"/>
+                        <xsd:enumeration value="YA"/>
+                        <xsd:enumeration value="YB"/>
+                        <xsd:enumeration value="YC"/>
+                        <xsd:enumeration value="YD"/>
+                        <xsd:enumeration value="YF"/>
+                        <xsd:enumeration value="YG"/>
+                        <xsd:enumeration value="YH"/>
+                        <xsd:enumeration value="YJ"/>
+                        <xsd:enumeration value="YK"/>
+                        <xsd:enumeration value="YL"/>
+                        <xsd:enumeration value="YM"/>
+                        <xsd:enumeration value="YN"/>
+                        <xsd:enumeration value="YP"/>
+                        <xsd:enumeration value="YQ"/>
+                        <xsd:enumeration value="YR"/>
+                        <xsd:enumeration value="YS"/>
+                        <xsd:enumeration value="YT"/>
+                        <xsd:enumeration value="YV"/>
+                        <xsd:enumeration value="YW"/>
+                        <xsd:enumeration value="YX"/>
+                        <xsd:enumeration value="YY"/>
+                        <xsd:enumeration value="YZ"/>
+                        <xsd:enumeration value="ZA"/>
+                        <xsd:enumeration value="ZB"/>
+                        <xsd:enumeration value="ZC"/>
+                        <xsd:enumeration value="ZD"/>
+                        <xsd:enumeration value="ZF"/>
+                        <xsd:enumeration value="ZG"/>
+                        <xsd:enumeration value="ZH"/>
+                        <xsd:enumeration value="ZJ"/>
+                        <xsd:enumeration value="ZK"/>
+                        <xsd:enumeration value="ZL"/>
+                        <xsd:enumeration value="ZM"/>
+                        <xsd:enumeration value="ZN"/>
+                        <xsd:enumeration value="ZP"/>
+                        <xsd:enumeration value="ZQ"/>
+                        <xsd:enumeration value="ZR"/>
+                        <xsd:enumeration value="ZS"/>
+                        <xsd:enumeration value="ZT"/>
+                        <xsd:enumeration value="ZU"/>
+                        <xsd:enumeration value="ZV"/>
+                        <xsd:enumeration value="ZW"/>
+                        <xsd:enumeration value="ZX"/>
+                        <xsd:enumeration value="ZY"/>
+                        <xsd:enumeration value="ZZ"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="CargoStateCode">
+                <xsd:simpleType>
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            3 possible values :
+                            CONT : container
+                            CONV : Bulk (conventionnel)
+                            VEHI : Vehicle
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="CONT"/>
+                        <xsd:enumeration value="CONV"/>
+                        <xsd:enumeration value="VEHI"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="xsd:boolean" name="HazardousCargoIndicator"/>
+            <xsd:element type="HazardousDescriptionType" name="HazardousDescription" maxOccurs="unbounded"
+                         minOccurs="0"/>
+            <xsd:element type="xsd:positiveInteger" name="NumberOfUnitsQuantity"/>
+            <xsd:element type="MeasureType" name="GrossWeight"/>
+            <xsd:element type="MeasureType" name="GrossCube" minOccurs="0"/>
+            <xsd:element type="xsd:string" name="GoodsDescription"/>
+            <xsd:element type="xsd:string" name="MarksAndNumber" minOccurs="0"/>
+            <xsd:element type="CargoUnitType" name="CargoUnit" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    CodeType and PortsType -->
+    <xsd:simpleType name="CodeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="5"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PortsType">
+        <xsd:sequence>
+            <xsd:element type="CodeType" name="OriginPortCode"/>
+            <xsd:element type="xsd:string" name="FromName"/>
+            <xsd:element type="CodeType" name="LoadPortCode"/>
+            <xsd:element type="xsd:string" name="LoadPortName"/>
+            <xsd:element type="CodeType" name="DischargePortCode"/>
+            <xsd:element type="xsd:string" name="DischargePortName"/>
+            <xsd:element type="CodeType" name="DestinationPortCode"/>
+            <xsd:element type="xsd:string" name="DestinationPortName"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    PartyType -->
+    <xsd:complexType name="AddressType">
+        <xsd:sequence>
+            <xsd:element type="xsd:string" name="Line1"/>
+            <xsd:element type="xsd:string" name="Line2" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="CountryCodeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="2"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PartyType">
+        <xsd:sequence>
+            <xsd:element type="xsd:string" name="Code"/>
+            <xsd:element type="xsd:string" name="Name"/>
+            <xsd:element type="AddressType" name="Address" minOccurs="0"/>
+            <xsd:element type="xsd:string" name="CityName" minOccurs="0"/>
+            <xsd:element type="CountryCodeType" name="CountryCode" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    Third level complex types-->
+    <xsd:complexType name="VesselType">
+        <xsd:sequence>
+            <xsd:element type="xsd:string" name="Code"/>
+            <xsd:element type="xsd:string" name="Name"/>
+            <xsd:element type="xsd:string" name="VoyageNumeric"/>
+            <xsd:element type="xsd:string" name="FlagCode" minOccurs="0"/>
+            <xsd:element type="xsd:string" name="LloydsID" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DischargePortType">
+        <xsd:sequence>
+            <xsd:element type="CodeType" name="PortCode" fixed="REPDG"/>
+            <xsd:element type="xsd:string" name="PortName"/>
+            <xsd:element type="xsd:dateTime" name="EstimatedArrivalDate"/>
+            <xsd:element type="xsd:dateTime" name="EstimatedDepartureDate"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="BillOfLadingType">
+        <xsd:sequence>
+            <xsd:element type="xsd:string" name="IdentificationID">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        BL number (mandatory)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element type="xsd:string" name="IssueDate"/>
+            <xsd:element type="PartyType" name="Shipper"/>
+            <xsd:element type="PartyType" name="Consignee"/>
+            <xsd:element type="PartyType" name="Notify"/>
+            <xsd:element type="xsd:string" name="MRN">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        MRN (reference number) of Customs ICS ENS Movement (mandatory for non EU goods)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element type="PortsType" name="Ports"/>
+            <xsd:element type="ConsignmentType" name="Consignment" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    Second level complex types-->
+    <xsd:complexType name="MfsType">
+        <xsd:sequence>
+            <xsd:element type="PartyType" name="Carrier"/>
+            <xsd:element type="VesselType" name="Vessel"/>
+            <xsd:element type="DischargePortType" name="DischargePort"/>
+            <xsd:element type="BillOfLadingType" name="BillOfLading" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    First level complex types-->
+    <xsd:complexType name="MessageHeaderType">
+        <xsd:sequence>
+            <xsd:element type="xsd:string" name="XDIJobId">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This is a unique reference for the whole message
+                        One message, one manifest.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ManifestType">
+        <xsd:sequence>
+            <xsd:element name="MessageHeader" type="MessageHeaderType"/>
+            <xsd:element type="MfsType" name="Mfs"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--    Root message-->
+    <xsd:element name="Manifest" type="ManifestType"/>
+
+</xsd:schema>
